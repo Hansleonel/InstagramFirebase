@@ -22,9 +22,9 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="180dp"
+                    android:layout_width="74dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/logo"
+                    android:src="@drawable/shield"
                     android:id="@+id/logo"
                     android:layout_marginLeft="-20dp"
                     android:layout_alignParentLeft="true"
