@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.develop.instagramtest.Fragments.MapFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.develop.instagramtest.Fragments.HomeFragment;
 import com.develop.instagramtest.Fragments.NotificationFragment;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         Bundle intent = getIntent().getExtras();
-        if (intent != null){
+        if (intent != null) {
             String publisher = intent.getString("publisherid");
 
             SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                    switch (item.getItemId()){
+                    switch (item.getItemId()) {
                         case R.id.nav_home:
                             selectedfragment = new HomeFragment();
                             break;
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(new Intent(MainActivity.this, PostActivity.class));
                             break;
                         case R.id.nav_heart:
-                            selectedfragment = new NotificationFragment();
+                            selectedfragment = new MapFragment();
                             break;
                         case R.id.nav_profile:
                             SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();

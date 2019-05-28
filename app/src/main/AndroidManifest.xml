@@ -32,6 +32,10 @@
         <activity android:name="com.develop.instagramtest.FollowersActivity" />
         <activity android:name="com.develop.instagramtest.StoryActivity" />
         <activity android:name="com.develop.instagramtest.AddStoryActivity"></activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCbLsxuJUIWRmwf9Fb5oPCC8ereEyeKqkE" />
     </application>
 
 </manifest>
