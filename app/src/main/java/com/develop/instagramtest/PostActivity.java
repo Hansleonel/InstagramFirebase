@@ -69,21 +69,21 @@ public class PostActivity extends AppCompatActivity {
 
 
         CropImage.activity()
-                .setAspectRatio(1,1)
+                .setAspectRatio(1, 1)
                 .start(PostActivity.this);
     }
 
-    private String getFileExtension(Uri uri){
+    private String getFileExtension(Uri uri) {
         ContentResolver cR = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-    private void uploadImage_10(){
+    private void uploadImage_10() {
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("Posting");
         pd.show();
-        if (mImageUri != null){
+        if (mImageUri != null) {
             final StorageReference fileReference = storageRef.child(System.currentTimeMillis()
                     + "." + getFileExtension(mImageUri));
 

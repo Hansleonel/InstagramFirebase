@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.develop.instagramtest.Fragments.MapFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.develop.instagramtest.Fragments.HomeFragment;
 import com.develop.instagramtest.Fragments.NotificationFragment;
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(new Intent(MainActivity.this, PostActivity.class));
                             break;
                         case R.id.nav_heart:
-                            selectedfragment = new MapFragment();
+                            selectedfragment = new NotificationFragment();
                             break;
                         case R.id.nav_profile:
                             SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();
