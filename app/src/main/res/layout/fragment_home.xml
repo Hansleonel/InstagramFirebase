@@ -22,26 +22,24 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/logo"
                     android:layout_width="74dp"
                     android:layout_height="35dp"
-                    android:src="@drawable/shield"
-                    android:id="@+id/logo"
-                    android:layout_marginLeft="-20dp"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="-20dp"
+                    android:src="@drawable/shield" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_inbox"
+                    android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
-
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_inbox" />
 
 
             </RelativeLayout>
-
 
 
         </android.support.v7.widget.Toolbar>
@@ -58,17 +56,17 @@
             android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_story"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/recycler_view_story"
-                android:layout_margin="5dp"
-                android:layout_below="@id/bar"/>
+                android:layout_below="@id/bar"
+                android:layout_margin="5dp" />
 
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/recycler_view"
-                android:layout_below="@id/recycler_view_story"/>
+                android:layout_below="@id/recycler_view_story" />
 
         </LinearLayout>
 
@@ -78,6 +76,6 @@
         android:id="@+id/progress_circular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true" />
 
 </RelativeLayout>

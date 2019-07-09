@@ -11,16 +11,18 @@
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
+        android:contentDescription="@string/image_logo_description"
         android:src="@drawable/shield" />
 
     <Button
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
         android:layout_marginTop="15dp"
-        android:background="@color/colorSelectItemButtonNavigation"
+        android:background="@drawable/rect_button_green"
         android:text="Log in"
         android:textColor="@color/white" />
 
@@ -28,9 +30,10 @@
         android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
         android:layout_marginTop="15dp"
-        android:background="@color/colorBlack"
+        android:background="@drawable/rect_button_black"
         android:text="Register"
         android:textColor="@color/white" />
 

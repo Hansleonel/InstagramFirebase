@@ -3,11 +3,10 @@ package com.develop.instagramtest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -28,9 +27,7 @@ import java.util.Map;
 
 import static com.develop.instagramtest.Model.Constants.URL_BASE;
 
-public class StartActivity extends AppCompatActivity {
-
-    Button login, register;
+public class SplashActivity extends AppCompatActivity {
 
     FirebaseUser firebaseUser;
 
@@ -42,8 +39,13 @@ public class StartActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        // checkLoginFirebase();
-        checkLoginRealDataBase();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // checkLoginFirebase();
+                checkLoginRealDataBase();
+            }
+        }, 2000);
     }
 
     private void checkLoginFirebase() {
@@ -51,8 +53,12 @@ public class StartActivity extends AppCompatActivity {
 
         //check if user is null
         if (firebaseUser != null) {
-            Intent intent = new Intent(StartActivity.this, MainActivity.class);
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
+        } else {
+            Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+            startActivity(i);
             finish();
         }
     }
@@ -74,16 +80,10 @@ public class StartActivity extends AppCompatActivity {
             // TODO para realizar el login
             loginRealDataBase();
         } else {
-            Intent intent = new Intent(StartActivity.this, LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            // TODO metodo usado en caso sea el primer ingreso a aplicacion
+            // TODO es decir se necesita realizar un login
+            toLoginActivity();
         }
-    }
-
-    private void ingresoOffLine() {
-        Intent intent = new Intent(StartActivity.this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
     }
 
     private void loginRealDataBase() {
@@ -113,7 +113,7 @@ public class StartActivity extends AppCompatActivity {
                             editor.putString("TOKENSTRING", TOKEN);
                             editor.commit();
 
-                            Intent intent = new Intent(StartActivity.this, MainActivity.class);
+                            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
 
@@ -124,8 +124,15 @@ public class StartActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                // TODO en caso exista un error
+                // TODO se hara un clear al sharedPreference
+                SharedPreferences sharedPreferences = getSharedPreferences("USERSHAREFILE", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
                 VolleyLog.d("onLoginRealDataBase", "Error: " + error.toString());
-                Toast.makeText(getApplicationContext(), "ERROR" + error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "ERROR " + error.toString(), Toast.LENGTH_LONG).show();
+                finish();
             }
         }) {
 
@@ -144,27 +151,15 @@ public class StartActivity extends AppCompatActivity {
         Volley.newRequestQueue(this).add(jsonObjReq);
     }
 
+    private void toLoginActivity() {
+        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
-
-        login = findViewById(R.id.login);
-        register = findViewById(R.id.register);
-
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(StartActivity.this, LoginActivity.class));
-            }
-        });
-
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(StartActivity.this, RegisterActivity.class));
-            }
-        });
-
+        setContentView(R.layout.activity_splash);
     }
 }

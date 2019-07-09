@@ -12,30 +12,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.develop.instagramtest.StartActivity">
+        <activity android:name=".StartActivity">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".PostActivity" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+        <activity android:name=".CommentsActivity" />
+        <activity android:name=".OptionsActivity" />
+        <activity android:name=".EditProfileActivity" />
+        <activity android:name=".FollowersActivity" />
+        <activity android:name=".StoryActivity" />
+        <activity android:name=".AddStoryActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCbLsxuJUIWRmwf9Fb5oPCC8ereEyeKqkE" />
+
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.develop.instagramtest.LoginActivity" />
-        <activity android:name="com.develop.instagramtest.RegisterActivity" />
-        <activity android:name="com.develop.instagramtest.MainActivity" />
-        <activity android:name="com.develop.instagramtest.PostActivity" />
-        <activity
-            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat" />
-        <activity android:name="com.develop.instagramtest.CommentsActivity" />
-        <activity android:name="com.develop.instagramtest.OptionsActivity" />
-        <activity android:name="com.develop.instagramtest.EditProfileActivity" />
-        <activity android:name="com.develop.instagramtest.FollowersActivity" />
-        <activity android:name="com.develop.instagramtest.StoryActivity" />
-        <activity android:name="com.develop.instagramtest.AddStoryActivity"></activity>
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCbLsxuJUIWRmwf9Fb5oPCC8ereEyeKqkE" />
     </application>
 
 </manifest>

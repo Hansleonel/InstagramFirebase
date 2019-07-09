@@ -4,68 +4,100 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
     android:padding="10dp"
-    android:gravity="center"
     tools:context=".RegisterActivity">
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:src="@drawable/shield"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edittext_background"
-        android:hint="Username"
-        android:id="@+id/username"
-        android:layout_marginTop="15dp"
-        android:padding="10dp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edittext_background"
-        android:hint="Full name"
-        android:id="@+id/fullname"
-        android:layout_marginTop="15dp"
-        android:padding="10dp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edittext_background"
-        android:hint="Email"
-        android:id="@+id/email"
-        android:inputType="textEmailAddress"
-        android:layout_marginTop="15dp"
-        android:padding="10dp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edittext_background"
-        android:hint="Password"
-        android:id="@+id/password"
-        android:inputType="textPassword"
-        android:layout_marginTop="15dp"
-        android:padding="10dp"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Register"
-        android:id="@+id/register"
-        android:textColor="@color/white"
-        android:background="@color/colorBlack"/>
+        android:layout_height="90dp"
+        android:src="@drawable/ic_user_register_vector" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Already have an sccount? Log in"
+        android:layout_marginTop="15dp"
+        android:text="Bienvenido"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/robotoligth"
+        android:text="Ingresa tus datos para crear un nuevo usuario" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rect_text"
+        android:drawableStart="@drawable/ic_user_register"
+        android:fontFamily="@font/robotoligth"
+        android:hint="Username"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/fullname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rect_text"
+        android:drawableStart="@drawable/ic_user"
+        android:fontFamily="@font/robotoligth"
+        android:hint="Full name"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rect_text"
+        android:drawableStart="@drawable/ic_mail"
+        android:fontFamily="@font/robotoligth"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rect_text"
+        android:drawableStart="@drawable/ic_lock"
+        android:fontFamily="@font/robotoligth"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/rect_button_black"
+        android:text="Register"
+        android:textColor="@color/white" />
+
+    <TextView
         android:id="@+id/txt_login"
-        android:layout_marginTop="10dp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Already have an sccount? Log in" />
 
 </LinearLayout>

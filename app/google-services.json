@@ -8,12 +8,57 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:297180161225:android:39d912d9a8229f18",
+        "android_client_info": {
+          "package_name": "com.devInsta.instagramtest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "297180161225-vrfb5mh3mh2e1pudcrceimo8527hak5b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.devInsta.instagramtest",
+            "certificate_hash": "f6568a15f7f799c0b22727595753fc90d1ab257d"
+          }
+        },
+        {
+          "client_id": "297180161225-tvmg4odjtkfbh951bai86k0s4gq6olvo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbLsxuJUIWRmwf9Fb5oPCC8ereEyeKqkE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "297180161225-tvmg4odjtkfbh951bai86k0s4gq6olvo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:297180161225:android:fae5f16f1258a715",
         "android_client_info": {
           "package_name": "com.develop.instagramtest"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "297180161225-1oakoovjf9r2r1jn3jfrvm5ns33jmop6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.develop.instagramtest",
+            "certificate_hash": "f6568a15f7f799c0b22727595753fc90d1ab257d"
+          }
+        },
         {
           "client_id": "297180161225-dbs3takigeki9s9u5b56ru96djpt3vkm.apps.googleusercontent.com",
           "client_type": 1,

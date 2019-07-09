@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private void checkFollowing(){
+    private void checkFollowing() {
         followingList = new ArrayList<>();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Follow")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -79,7 +79,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 followingList.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     followingList.add(snapshot.getKey());
                 }
 
@@ -94,17 +94,17 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void readPosts(){
+    private void readPosts() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 postList.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Post post = snapshot.getValue(Post.class);
-                    for (String id : followingList){
-                        if (post.getPublisher().equals(id)){
+                    for (String id : followingList) {
+                        if (post.getPublisher().equals(id)) {
                             postList.add(post);
                         }
                     }
@@ -121,7 +121,7 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void readStory(){
+    private void readStory() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Story");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -139,7 +139,7 @@ public class HomeFragment extends Fragment {
                             countStory++;
                         }
                     }
-                    if (countStory > 0){
+                    if (countStory > 0) {
                         storyList.add(story);
                     }
                 }
