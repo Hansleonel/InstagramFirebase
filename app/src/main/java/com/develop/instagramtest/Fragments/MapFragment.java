@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.develop.instagramtest.Customizers.CustomInfoWindowAdapter;
 import com.develop.instagramtest.MainActivity;
 import com.develop.instagramtest.R;
 import com.google.android.gms.maps.CameraUpdate;
@@ -30,6 +31,7 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
@@ -48,6 +50,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     GoogleMap MgoogleMap;
 
     Context mcontext;
+    CustomInfoWindowAdapter customInfoWindowAdapter;
+
+    String idPredioCenter;
 
     private String TokenUser;
 
@@ -79,23 +84,37 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         MgoogleMap = googleMap;
+        customInfoWindowAdapter = new CustomInfoWindowAdapter(LayoutInflater.from(mcontext));
+        MgoogleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(LayoutInflater.from(mcontext)));
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        CameraUpdate camupd = CameraUpdateFactory.newLatLngZoom(new LatLng(-12.0431800, -77.0282400), 12);
+        CameraUpdate camupd = CameraUpdateFactory.newLatLngZoom(new LatLng(-9.189967, -75.015152), 5);
         MgoogleMap.moveCamera(camupd);
         eventsUser();
+        // militarCentersUser();
+        naviCentersUser();
+        airCentersUser();
+
+        // TODO onClickInfoWindowListener nos permite realizar acciones
+        // TODO cuando se hace un click en windowInfow de los markers del mapa
+        MgoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Log.d("onMapReady", "onInfoWindowClick: el tag del marker es " + marker.getTag());
+
+            }
+        });
     }
+
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        // eventsUser();
     }
 
     private void eventsUser() {
@@ -133,9 +152,149 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                // VolleyLog.d("eRRor Response", "Error: " + error.toString());
                 VolleyLog.d("onEventsUser ", "Error: " + error.toString());
-                Toast.makeText(getContext(), "ON RESPONSE" + error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(mcontext, "ON RESPONSE" + error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                headers.put("Authorization", "Bearer " + TokenUser);
+                return headers;
+            }
+        };
+        // Adding request to request queue
+        Volley.newRequestQueue(mcontext).add(jsonArrayRequest);
+    }
+
+    private void militarCentersUser() {
+        MgoogleMap.clear();
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET, URL_BASE + "/predioffaasCustom/EP", null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            for (int i = 0; i < 200; i++) {
+                                JSONObject jrJsonObject = response.getJSONObject(i);
+                                String latitud = jrJsonObject.getString("latitud");
+                                String longitud = jrJsonObject.getString("longitud");
+                                String Entidad = jrJsonObject.getString("entidad");
+                                idPredioCenter = jrJsonObject.getString("idPredio");
+
+                                Double lat = Double.parseDouble(latitud);
+                                Double longit = Double.parseDouble(longitud);
+                                MgoogleMap.addMarker(new MarkerOptions().position(new LatLng(lat, longit)).title(Entidad).snippet(idPredioCenter).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_military)));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("onVolleyError", "Error: " + error.toString());
+                Toast.makeText(mcontext, "Error: " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                headers.put("Authorization", "Bearer " + TokenUser);
+                return headers;
+            }
+        };
+        // Adding request to request queue
+        Volley.newRequestQueue(mcontext).add(jsonArrayRequest);
+    }
+
+    private void naviCentersUser() {
+        MgoogleMap.clear();
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET, URL_BASE + "/predioffaasCustom/MGP", null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject jrJsonObject = response.getJSONObject(i);
+                                String latitud = jrJsonObject.getString("latitud");
+                                String longitud = jrJsonObject.getString("longitud");
+                                String Entidad = jrJsonObject.getString("entidad");
+                                String Descripicion = jrJsonObject.getString("descripcion");
+                                idPredioCenter = jrJsonObject.getString("idPredio");
+
+                                Double lat = Double.parseDouble(latitud);
+                                Double longit = Double.parseDouble(longitud);
+                                MgoogleMap.addMarker(new MarkerOptions().position(new LatLng(lat, longit)).title(Entidad).snippet(idPredioCenter).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_navy)));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("onVolleyError", "Error: " + error.toString());
+                Toast.makeText(mcontext, "Error: " + error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                headers.put("Authorization", "Bearer " + TokenUser);
+                return headers;
+            }
+        };
+        // Adding request to request queue
+        Volley.newRequestQueue(mcontext).add(jsonArrayRequest);
+    }
+
+    private void airCentersUser() {
+        MgoogleMap.clear();
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET, URL_BASE + "/predioffaasCustom/FAP", null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject jrJsonObject = response.getJSONObject(i);
+                                String latitud = jrJsonObject.getString("latitud");
+                                String longitud = jrJsonObject.getString("longitud");
+                                String Entidad = jrJsonObject.getString("entidad");
+                                String Descripicion = jrJsonObject.getString("descripcion");
+                                idPredioCenter = jrJsonObject.getString("idPredio");
+
+                                Double lat = Double.parseDouble(latitud);
+                                Double longit = Double.parseDouble(longitud);
+                                MgoogleMap.addMarker(new MarkerOptions().position(new LatLng(lat, longit)).title(Entidad).snippet(idPredioCenter).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_air)));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("onVollerError", "Error: " + error.toString());
+                Toast.makeText(mcontext, "" + error.toString(), Toast.LENGTH_LONG).show();
             }
         }) {
 
