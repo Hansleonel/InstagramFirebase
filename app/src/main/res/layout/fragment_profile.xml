@@ -196,7 +196,6 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:contentDescription="@string/image_user_post"
                     android:id="@+id/my_fotos"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dp"
