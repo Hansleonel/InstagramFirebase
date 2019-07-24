@@ -1,6 +1,7 @@
 package com.develop.instagramtest;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -34,9 +35,19 @@ public class OptionsActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
+                // TODO cuando se usó firebase para el login
+                /* FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(OptionsActivity.this, StartActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));*/
+                // TODO cuando se uso un login normal limpiamos todo el sharedPreference
+                // TODO ademas limpiamos de memoria los activities previos
+                SharedPreferences sharedPreferences = getSharedPreferences("USERSHAREFILE", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
+                Intent i = new Intent(OptionsActivity.this, SplashActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
             }
         });
     }

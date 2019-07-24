@@ -1,20 +1,25 @@
 package com.develop.instagramtest.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.develop.instagramtest.Adapter.EventAdapter;
 import com.develop.instagramtest.Model.Event;
+import com.develop.instagramtest.OptionsActivity;
 import com.develop.instagramtest.R;
 
 import java.util.ArrayList;
@@ -23,8 +28,9 @@ import java.util.List;
 
 public class ProfileUserFragment extends Fragment {
 
-    ImageView image_profile;
+    ImageView image_profile, options_profile;
     TextView txtV_username, txtV_userDescription, txtV_userLocation, txtV_userEvents, txtV_userPetitions, txtV_userEstadistics;
+    Button btn_call_profile, btn_mail_profile;
     RecyclerView rV_events;
     List<Event> eventArrayList;
     EventAdapter eventAdapter;
@@ -41,6 +47,9 @@ public class ProfileUserFragment extends Fragment {
         txtV_userEvents = view.findViewById(R.id.events_profile_user);
         txtV_userPetitions = view.findViewById(R.id.petitions_profile_user);
         txtV_userEstadistics = view.findViewById(R.id.estadistics_profile_user);
+        options_profile = view.findViewById(R.id.options_profile);
+        btn_call_profile = view.findViewById(R.id.btn_call_user);
+        btn_mail_profile = view.findViewById(R.id.btn_send_mail_user);
 
         rV_events = view.findViewById(R.id.rv_Eventos);
         rV_events.setHasFixedSize(true);
@@ -52,7 +61,27 @@ public class ProfileUserFragment extends Fragment {
 
         myEvents();
 
+        options_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), OptionsActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        btn_mail_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("btnMailProfile", "onClick: send mail");
+            }
+        });
+
+        btn_call_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("btnCallProfile", "onClick: call user");
+            }
+        });
         return view;
     }
 
