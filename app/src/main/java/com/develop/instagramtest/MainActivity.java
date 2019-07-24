@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.develop.instagramtest.Fragments.MapFragment;
+import com.develop.instagramtest.Fragments.ProfileUserFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.develop.instagramtest.Fragments.HomeFragment;
 import com.develop.instagramtest.Fragments.NotificationFragment;
@@ -81,10 +82,10 @@ public class MainActivity extends AppCompatActivity {
                             // TODO dicha consulta nos devuelve el usuario lorgeado en ese instante
                             // TODO luego con el editor sharedPreference almacenamos de forma persistente el profileid
                             // TODO dicha variable se usara en el ProfileFragment
-                            SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();
-                            editor.putString("profileid", FirebaseAuth.getInstance().getCurrentUser().getUid());
-                            editor.apply();
-                            selectedfragment = new ProfileFragment();
+                            // SharedPreferences.Editor editor = getSharedPreferences("PREFS", MODE_PRIVATE).edit();
+                            // editor.putString("profileid", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            // editor.apply();
+                            selectedfragment = new ProfileUserFragment();
                             break;
                     }
                     if (selectedfragment != null) {
